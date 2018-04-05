@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -25,11 +26,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent = new Intent(this, SecondActivity.class);
 
+        double value1;
+        double value2;
+
+        TextView textView1 = findViewById(R.id.textView1);
+        textView1.setText("");
+
         EditText editText1 = findViewById(R.id.editText1);
-        double value1 = Double.parseDouble(editText1.getText().toString());
+        if (editText1.getText().toString().length() != 0) {
+            value1 = Double.parseDouble(editText1.getText().toString());
+        } else {
+            textView1.setText("未入力です。数値を入力してください。");
+            return;
+        }
 
         EditText editText2 = findViewById(R.id.editText2);
-        double value2 = Double.parseDouble(editText2.getText().toString());
+        if (editText2.getText().toString().length() != 0) {
+            value2 = Double.parseDouble(editText1.getText().toString());
+        } else {
+            textView1.setText("未入力です。数値を入力してください。");
+            return;
+        }
 
         double result = 0;
 
@@ -44,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 result = value1 * value2;
                 break;
             case R.id.button4:
+                if (value2 == 0) {
+                    textView1.setText("0で割ることはできません。");
+                    return;
+                }
                 result = value1 / value2;
                 break;
             default:
