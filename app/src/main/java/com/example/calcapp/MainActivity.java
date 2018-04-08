@@ -34,7 +34,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         EditText editText1 = findViewById(R.id.editText1);
         if (editText1.getText().toString().length() != 0) {
-            value1 = Double.parseDouble(editText1.getText().toString());
+            try {
+                value1 = Double.parseDouble(editText1.getText().toString());
+            } catch (NumberFormatException e) {
+                textView1.setText("数値以外が入力されました。");
+                return;
+            }
         } else {
             textView1.setText("未入力です。数値を入力してください。");
             return;
@@ -42,7 +47,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         EditText editText2 = findViewById(R.id.editText2);
         if (editText2.getText().toString().length() != 0) {
-            value2 = Double.parseDouble(editText1.getText().toString());
+            try {
+                value2 = Double.parseDouble(editText2.getText().toString());
+            } catch (NumberFormatException e) {
+                textView1.setText("数値以外が入力されました。");
+                return;
+            }
         } else {
             textView1.setText("未入力です。数値を入力してください。");
             return;
